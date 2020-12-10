@@ -43,22 +43,28 @@ body {
 
 /* Main Wrappers */
 #aside-left {
+  /* Layaout */
   display: flex;
-  width: 270px;
+  width: 250px;
   height: 540px;
+  /* Border */
   border: 1px solid green;
 }
 
 #sketch-container {
+  /* Layaout */
   display: flex;
   width: 960px;
   height: 540px;
+  /* Border */
   border: 1px solid red;
 }
 
 #aside-right {
+  /* Layaout */
   display: flex;
-  width: 270px;
+  width: 250px;
   height: 540px;
+  /* Border */
   border: 1px solid green;
 }
