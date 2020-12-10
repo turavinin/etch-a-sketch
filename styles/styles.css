@@ -1,0 +1,13 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+/* ROOT */
+:root {
+  --titleFont: font-family: 'Permanent Marker', cursive;
+}
+/* GLOBAL */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
