@@ -57,7 +57,7 @@ body {
 }
 
 .color-container,
-.size-container,
+.slide-container,
 .clear-container {
   display: flex;
   width: 80%;
@@ -65,12 +65,52 @@ body {
   flex-direction: column;
 }
 
+/* Toggle */
 .toggle-container {
   display: flex;
   width: 80%;
   height: 150px;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/* Slide */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  background: #8f4578;
+  outline: none;
+  opacity: 0.7;
+  border: 1px solid #44233a;
+  border-radius: 20px;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+  background: #000;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: 25px;
+  height: 25px;
+  background: #000;
+  cursor: pointer;
 }
 
 /* ----- Right ----- */
