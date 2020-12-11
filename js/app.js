@@ -13,12 +13,18 @@ const createDivs = (size) => {
   }
 };
 
+// CHANGE THE PARAMETERS OF THE GRID CONTAINER
+
 // OUTPUT THE SLIDER RANGE IN THE SPANC
 // Initial output text
 sliderTextOutput.innerHTML = `${sliderRange.value} x ${sliderRange.value}`;
+let sliderValue;
 // Output on slider selection
 sliderRange.oninput = function () {
   sliderTextOutput.innerHTML = `${this.value} x ${this.value}`;
+
+  // Create the divs whit the slider value
+  createDivs(this.value);
 };
 
-createDivs(20);
+console.log(sliderRange.oninput(this.value));
