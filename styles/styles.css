@@ -59,6 +59,7 @@ body {
 .color-container,
 .slide-container,
 .clear-container {
+  /* Layaout */
   display: flex;
   width: 80%;
   height: auto;
@@ -67,6 +68,7 @@ body {
 
 /* Toggle */
 .toggle-container {
+  /* Layaout */
   display: flex;
   width: 80%;
   height: 150px;
@@ -75,16 +77,24 @@ body {
 }
 
 /* Slider */
+.slide-container {
+  align-items: center;
+}
+
 .slider {
-  -webkit-appearance: none;
-  appearance: none;
+  /* Layaout */
   width: 100%;
   height: 6px;
+  margin-bottom: 10px;
+  /* Appearance */
+  -webkit-appearance: none;
+  appearance: none;
   background: #8f4578;
   outline: none;
-  opacity: 0.7;
   border: 1px solid #44233a;
   border-radius: 20px;
+  /* Transition */
+  opacity: 0.7;
   -webkit-transition: 0.2s;
   transition: opacity 0.2s;
 }
@@ -94,22 +104,24 @@ body {
 }
 
 .slider::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  /* Appearance */
   -webkit-appearance: none;
   appearance: none;
   border-radius: 100%;
-  width: 15px;
-  height: 15px;
   background: #000;
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  /* Appearance */
   -moz-appearance: none;
   appearance: none;
   border: none;
   border-radius: 100%;
-  width: 15px;
-  height: 15px;
   background: #000;
   cursor: pointer;
 }
@@ -135,9 +147,9 @@ body {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(20, 1fr);
+  /* Border */
   border-top: 1px solid #444444;
   border-left: 1px solid #444444;
-  /* Border */
 }
 
 /* DIVS */
