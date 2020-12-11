@@ -1,12 +1,12 @@
-/* FONTS */
+/* ----- FONTS ----- */
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
-/* ROOT */
+/* ----- ROOT ----- */
 :root {
   --titleFont: 'Permanent Marker', cursive;
 }
 
-/* GLOBAL */
+/* ----- GLOBAL ----- */
 * {
   padding: 0;
   margin: 0;
@@ -21,7 +21,7 @@ body {
   font-size: 15px;
 }
 
-/* HEADER */
+/* ----- HEADER ----- */
 #header {
   display: flex;
   height: 100px;
@@ -31,33 +31,25 @@ body {
   justify-content: center;
 }
 
-/* MAIN */
+/* ----- MAIN ----- */
 #main {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 100vw;
   height: fit-content;
 }
 
-/* Main Wrappers */
+/* ----- ASAID WRAPPERS ----- */
 #aside-left {
   /* Layaout */
   display: flex;
   width: 250px;
   height: 540px;
+  margin-right: 20px;
   /* Border */
   border: 1px solid green;
-}
-
-#sketch-container {
-  /* Layaout */
-  display: flex;
-  width: 960px;
-  height: 540px;
-  /* Border */
-  border: 1px solid red;
 }
 
 #aside-right {
@@ -65,6 +57,30 @@ body {
   display: flex;
   width: 250px;
   height: 540px;
+  margin-left: 20px;
   /* Border */
   border: 1px solid green;
+}
+
+/* ----- SKETCH WRAPPER ----- */
+#sketch-container {
+  /* Layaout */
+  display: flex;
+  min-width: 960px;
+  min-height: 540px;
+  /* Grid */
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  /* Border */
+  border: 1px solid rgb(0, 0, 0);
+}
+
+/* DIVS */
+.cell {
+  /* Bg */
+  background-color: #e6e6e6;
+  /* Borders */
+  border-right: 1px solid #444444;
+  border-bottom: 1px solid #444444;
 }

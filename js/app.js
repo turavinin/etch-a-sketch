@@ -9,4 +9,4 @@ const createDivs = (size) => {
   }
 };
 
-createDivs(20);
+createDivs(400);
