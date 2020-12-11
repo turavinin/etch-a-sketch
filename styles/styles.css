@@ -88,8 +88,8 @@ body {
 #sketch-container {
   /* Layaout */
   display: flex;
-  min-width: 960px;
-  min-height: 540px;
+  min-width: 600px;
+  min-height: 600px;
   /* Grid */
   display: grid;
   grid-template-columns: repeat(20, 1fr);
