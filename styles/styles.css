@@ -74,12 +74,12 @@ body {
   justify-content: space-between;
 }
 
-/* Slide */
+/* Slider */
 .slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 5px;
+  height: 6px;
   background: #8f4578;
   outline: none;
   opacity: 0.7;
@@ -107,8 +107,9 @@ body {
   -moz-appearance: none;
   appearance: none;
   border: none;
-  width: 25px;
-  height: 25px;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
   background: #000;
   cursor: pointer;
 }
