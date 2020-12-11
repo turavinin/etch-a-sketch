@@ -42,9 +42,13 @@ body {
 }
 
 /* ----- ASAID WRAPPERS ----- */
+/* ----- Left ----- */
 #aside-left {
   /* Layaout */
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 250px;
   height: 540px;
   margin-right: 20px;
@@ -52,6 +56,24 @@ body {
   border: 1px solid green;
 }
 
+.color-container,
+.size-container,
+.clear-container {
+  display: flex;
+  width: 80%;
+  height: auto;
+  flex-direction: column;
+}
+
+.toggle-container {
+  display: flex;
+  width: 80%;
+  height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ----- Right ----- */
 #aside-right {
   /* Layaout */
   display: flex;
@@ -72,8 +94,9 @@ body {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(20, 1fr);
+  border-top: 1px solid #444444;
+  border-left: 1px solid #444444;
   /* Border */
-  border: 1px solid rgb(0, 0, 0);
 }
 
 /* DIVS */
