@@ -1,30 +1,52 @@
-// DOM VARIABLES
+/* ------------------------------ DOM VARIABLES ----------------------------- */
+
 const sketchContainer = document.querySelector('#sketch-container');
 const sliderRange = document.querySelector('#slider-range');
 const sliderTextOutput = document.querySelector('.size-value');
 
-// CREATE DIVS IN SKETCH CONTAINER
-const createDivs = (size) => {
-  // Create a variable to store the total number of divs
-  let amountOfDivs = size * size;
-  // Loop as many times as required divs
+/* ----------------------------- WINDOW ON LOAD ----------------------------- */
+
+window.onload = () => {
+  sliderTextOutput.innerHTML = `${sliderRange.value} x ${sliderRange.value}`;
+  createDivs(sliderRange.value);
+};
+
+/* ------------------------------ SLIDER OUTPUT ----------------------------- */
+
+// Output the selected slider range in span and create the divs
+sliderRange.oninput = function () {
+  sliderTextOutput.innerHTML = `${this.value} x ${this.value}`;
+  deleteAllDivs();
+  createDivs(this.value);
+  changeGridParamenter(this.value);
+};
+
+/* ------------------------------- CREATE / DELETE DIVS ------------------------------ */
+
+// Create the wanted amount of divs
+const createDivs = (sizeOfGrid) => {
+  let amountOfDivs = sizeOfGrid * sizeOfGrid;
   for (let i = 0; i < amountOfDivs; i++) {
-    sketchContainer.innerHTML += `<div class="cell"></div>`;
+    createOneDiv();
   }
 };
 
-// CHANGE THE PARAMETERS OF THE GRID CONTAINER
-
-// OUTPUT THE SLIDER RANGE IN THE SPANC
-// Initial output text
-sliderTextOutput.innerHTML = `${sliderRange.value} x ${sliderRange.value}`;
-let sliderValue;
-// Output on slider selection
-sliderRange.oninput = function () {
-  sliderTextOutput.innerHTML = `${this.value} x ${this.value}`;
-
-  // Create the divs whit the slider value
-  createDivs(this.value);
+// Create One Div
+const createOneDiv = () => {
+  let oneDiv = document.createElement('div');
+  oneDiv.classList.add('cell');
+  sketchContainer.appendChild(oneDiv);
 };
 
-console.log(sliderRange.oninput(this.value));
+const deleteAllDivs = () => {
+  while (sketchContainer.firstChild) {
+    sketchContainer.removeChild(sketchContainer.firstChild);
+  }
+};
+
+/* ----------------- CHANGE THE GRID PARAMETERS ON SLIDER OUTPUT ---------------- */
+
+const changeGridParamenter = (newParameter) => {
+  sketchContainer.style.gridTemplateColumns = `repeat(${newParameter}, 1fr)`;
+  sketchContainer.style.gridTemplateRows = `repeat(${newParameter}, 1fr)`;
+};
