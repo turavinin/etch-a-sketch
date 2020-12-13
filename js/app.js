@@ -16,6 +16,9 @@ window.onload = () => {
 // Output the selected slider range in span and create the divs
 sliderRange.oninput = function () {
   sliderTextOutput.innerHTML = `${this.value} x ${this.value}`;
+};
+
+sliderRange.onmouseup = function () {
   deleteAllDivs();
   createDivs(this.value);
   changeGridParamenter(this.value);
