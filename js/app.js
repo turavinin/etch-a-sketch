@@ -11,13 +11,14 @@ window.onload = () => {
   createDivs(sliderRange.value);
 };
 
-/* ------------------------------ SLIDER OUTPUT ----------------------------- */
+/* ------------------------------ SLIDER OUTPUT / DIV CREATION ----------------------------- */
 
-// Output the selected slider range in span and create the divs
+// Output the selected slider range in span
 sliderRange.oninput = function () {
   sliderTextOutput.innerHTML = `${this.value} x ${this.value}`;
 };
 
+// On mouse up create the coresponding divs and aplly grid parameters
 sliderRange.onmouseup = function () {
   deleteAllDivs();
   createDivs(this.value);
