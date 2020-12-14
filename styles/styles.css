@@ -1,16 +1,25 @@
-/* ----- FONTS ----- */
+/* -------------------------------------------- */
+/*                     FONTS                    */
+/* -------------------------------------------- */
+
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
-/* ----- ROOT ----- */
+/* -------------------------------------------- */
+/*                     ROOT                     */
+/* -------------------------------------------- */
+
 :root {
   --titleFont: 'Permanent Marker', cursive;
   --textFont: 'Ubuntu', sans-serif;
   --gridBorderColor: #afafaf;
 }
 
-/* ----- GLOBAL ----- */
+/* -------------------------------------------- */
+/*                    GLOBAL                    */
+/* -------------------------------------------- */
+
 * {
   padding: 0;
   margin: 0;
@@ -25,7 +34,10 @@ body {
   font-size: 15px;
 }
 
-/* ----- HEADER ----- */
+/* -------------------------------------------- */
+/*                    HEADER                    */
+/* -------------------------------------------- */
+
 #header {
   display: flex;
   height: 100px;
@@ -35,7 +47,10 @@ body {
   justify-content: center;
 }
 
-/* ----- MAIN ----- */
+/* -------------------------------------------- */
+/*                     MAIN                     */
+/* -------------------------------------------- */
+
 #main {
   display: flex;
   flex-direction: row;
@@ -45,8 +60,12 @@ body {
   height: fit-content;
 }
 
-/* ----- ASAID WRAPPERS ----- */
-/* ----- Left ----- */
+/* -------------------------------------------- */
+/*                 ASAID WRAPPER                */
+/* -------------------------------------------- */
+
+/* ------------------- LEFT ------------------- */
+
 #aside-left {
   /* Layaout */
   display: flex;
@@ -61,6 +80,9 @@ body {
   border: 1px solid green;
 }
 
+/* General Containers Options */
+.grid-options,
+.toggle-grid,
 .color-container,
 .slide-container,
 .clear-container {
@@ -71,7 +93,8 @@ body {
   flex-direction: column;
 }
 
-/* Toggle */
+/* ------------- Toggle Container ------------- */
+
 .toggle-container {
   /* Layaout */
   display: flex;
@@ -81,7 +104,17 @@ body {
   justify-content: space-between;
 }
 
-/* Slider */
+/* --------------- Grid Options --------------- */
+
+.grid-options {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* SLIDER */
 .slide-container {
   align-items: center;
 }
@@ -138,7 +171,7 @@ body {
   font-weight: 800;
 }
 
-/* ----- Right ----- */
+/* ------------------- RIGHT ------------------- */
 #aside-right {
   /* Layaout */
   display: flex;
@@ -149,14 +182,26 @@ body {
   border: 1px solid green;
 }
 
-/* ----- SKETCH WRAPPER ----- */
+/* -------------------------------------------- */
+/*                SKETCH WRAPPER                */
+/* -------------------------------------------- */
+
+/* --------------- SKETCH BORDER -------------- */
+
 .sketch-border {
-  padding: 10px;
-  background-image: url(/images/sketch-bg-4.png);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  padding: 2px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(105, 0, 67, 1) 0%,
+    rgba(102, 41, 108, 1) 4%,
+    rgba(11, 109, 134, 1) 65%,
+    rgba(6, 85, 101, 1) 100%
+  );
 }
+
+/* ------------- SKETCH CONTAINER ------------- */
 
 #sketch-container {
   /* Layaout */
@@ -172,11 +217,16 @@ body {
   border-left: 1px solid var(--gridBorderColor);
 }
 
-/* DIVS */
+/* ------------------- DIVS ------------------- */
+
 .cell {
   /* Bg */
   background-color: #e6e6e6;
   /* Borders */
   border-right: 1px solid var(--gridBorderColor);
   border-bottom: 1px solid var(--gridBorderColor);
+}
+
+.cell:hover {
+  background-color: #000000;
 }

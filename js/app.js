@@ -6,9 +6,11 @@ const sliderTextOutput = document.querySelector('.size-value');
 
 /* ----------------------------- WINDOW ON LOAD ----------------------------- */
 
+// Default grid
 window.onload = () => {
   sliderTextOutput.innerHTML = `${sliderRange.value} x ${sliderRange.value}`;
   createDivs(sliderRange.value);
+  changeGridParamenter(sliderRange.value);
 };
 
 /* ------------------------------ SLIDER OUTPUT / DIV CREATION ----------------------------- */
@@ -18,7 +20,7 @@ sliderRange.oninput = function () {
   sliderTextOutput.innerHTML = `${this.value} x ${this.value}`;
 };
 
-// On mouse up create the coresponding divs and aplly grid parameters
+// On mouse up create the correspondent divs and aplly grid parameters
 sliderRange.onmouseup = function () {
   deleteAllDivs();
   createDivs(this.value);
@@ -28,8 +30,8 @@ sliderRange.onmouseup = function () {
 /* ------------------------------- CREATE / DELETE DIVS ------------------------------ */
 
 // Create the wanted amount of divs
-const createDivs = (sizeOfGrid) => {
-  let amountOfDivs = sizeOfGrid * sizeOfGrid;
+const createDivs = (oneSide) => {
+  let amountOfDivs = oneSide * oneSide;
   for (let i = 0; i < amountOfDivs; i++) {
     createOneDiv();
   }
