@@ -227,6 +227,6 @@ body {
   border-bottom: 1px solid var(--gridBorderColor);
 }
 
-/* .cell:hover {
+.cell:hover {
   background-color: #7afcd5;
-} */
+}
