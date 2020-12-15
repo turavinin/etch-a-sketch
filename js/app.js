@@ -5,8 +5,13 @@ const sliderRange = document.querySelector('#slider-range');
 const sliderTextOutput = document.querySelector('.size-value');
 const cell = document.querySelectorAll('.cell');
 const colorWell = document.querySelector('.color-input');
+const bgColorWell = document.querySelector('.bg-color-input');
 const clearBtn = document.querySelector('.btn-clear');
 const eraserBtn = document.querySelector('.btn-eraser');
+
+/* ----------------- DEFAULTS ----------------- */
+let selectedColor = '#000000';
+let defaultBg = '#e6e6e6';
 
 /* -------------- WINDOW ON LOAD -------------- */
 
@@ -23,10 +28,6 @@ window.onload = () => {
 };
 
 /* -------------- COLOR SELECTION ------------- */
-
-// Default Color
-let selectedColor = '#000000';
-
 // Update pen color
 const updateColor = (e) => {
   selectedColor = e.target.value;
@@ -34,6 +35,18 @@ const updateColor = (e) => {
 
 // Update to the selected color
 colorWell.addEventListener('input', updateColor);
+
+/* ------------ BG SELECTION ----------- */
+/* const changeBg = (e) => {
+  let cells = document.querySelectorAll('.cell');
+  let newBg = e.target.value;
+
+  cells.forEach((cell) => {
+    cell.classList.add('cell-bg');
+  });
+};
+
+bgColorWell.addEventListener('input', changeBg); */
 
 /* ---------------- PAINT ON/OFF CELLS---------------- */
 
@@ -88,7 +101,7 @@ const paint = (e) => {
 const clearAllCells = () => {
   let cells = document.querySelectorAll('.cell');
   cells.forEach((cell) => {
-    cell.style.backgroundColor = '#e6e6e6';
+    cell.style.backgroundColor = `${defaultBg}`;
   });
 };
 
@@ -134,6 +147,7 @@ const createOneDiv = () => {
   sketchContainer.appendChild(oneDiv);
 };
 
+// Delete all the divs
 const deleteAllDivs = () => {
   while (sketchContainer.firstChild) {
     sketchContainer.removeChild(sketchContainer.firstChild);
