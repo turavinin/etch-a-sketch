@@ -15,7 +15,7 @@ window.onload = () => {
   cells = document.getElementsByClassName('cell');
 };
 
-/* ---------------- PAINT CELLS---------------- */
+/* ---------------- PAINT ON/OFF CELLS---------------- */
 
 // Create a variable to toggle the action of painting
 let togglePaint = true;
@@ -38,6 +38,11 @@ document.addEventListener('click', (e) => {
     // Change the state of the toggle
     togglePaint = true;
   }
+});
+
+// Stop painting when the mouse leaves the sketch
+sketchContainer.addEventListener('mouseleave', () => {
+  paintOnHover(false);
 });
 
 // Paint on hover
