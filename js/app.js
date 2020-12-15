@@ -6,6 +6,7 @@ const sliderTextOutput = document.querySelector('.size-value');
 const cell = document.querySelectorAll('.cell');
 const colorWell = document.querySelector('.color-input');
 const clearBtn = document.querySelector('.btn-clear');
+const eraserBtn = document.querySelector('.btn-eraser');
 
 /* -------------- WINDOW ON LOAD -------------- */
 
@@ -93,6 +94,15 @@ const clearAllCells = () => {
 
 clearBtn.addEventListener('click', clearAllCells);
 
+/* ------------ ERASER ----------- */
+const erase = () => {
+  selectedColor = '#e6e6e6';
+  /*   cell.forEach((e) => {
+    e.addEventListener('mouseover', paint(true));
+  }); */
+};
+
+eraserBtn.addEventListener('click', erase);
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
 
 // Output the selected slider range in span

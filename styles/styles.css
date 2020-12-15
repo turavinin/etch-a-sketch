@@ -226,6 +226,8 @@ body {
     rgba(11, 109, 134, 1) 65%,
     rgba(6, 85, 101, 1) 100%
   );
+  border-left: 1px solid var(--gridBorderColor);
+  border-top: 1px solid var(--gridBorderColor);
 }
 
 /* ------------- SKETCH CONTAINER ------------- */
