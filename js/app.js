@@ -4,6 +4,7 @@ const sketchContainer = document.querySelector('#sketch-container');
 const sliderRange = document.querySelector('#slider-range');
 const sliderTextOutput = document.querySelector('.size-value');
 const cell = document.querySelectorAll('.cell');
+const colorWell = document.querySelector('.color-input');
 
 /* -------------- WINDOW ON LOAD -------------- */
 
@@ -15,7 +16,16 @@ window.onload = () => {
   cells = document.getElementsByClassName('cell');
 };
 
+/* -------------- COLOR SELECTION ------------- */
+
 /* ---------------- PAINT ON/OFF CELLS---------------- */
+let selectedColor = '#000000';
+
+const updateColor = (e) => {
+  selectedColor = e.target.value;
+};
+
+colorWell.addEventListener('input', updateColor);
 
 // Create a variable to toggle the action of painting
 let togglePaint = true;
@@ -25,14 +35,14 @@ document.addEventListener('click', (e) => {
   // Check the corresponding target and the state of the toggle
   if (e.target.classList == 'cell' && togglePaint == true) {
     // Paint clicked cell
-    e.target.style.backgroundColor = 'red';
+    e.target.style.backgroundColor = `${selectedColor}`;
     // Paint cells on hover
     paintOnHover(true);
     // Change the state of the toggle
     togglePaint = false;
   } else if (togglePaint == false) {
     // Paint with the same color the cell when finish painting
-    e.target.style.backgroundColor = 'red';
+    e.target.style.backgroundColor = `${selectedColor}`;
     // Remover the action of painting
     paintOnHover(false);
     // Change the state of the toggle
@@ -59,7 +69,7 @@ const paintOnHover = (trigger) => {
 // Paint one cell
 const paint = (e) => {
   if (e.target.classList == 'cell') {
-    e.target.style.backgroundColor = `red`;
+    e.target.style.backgroundColor = `${selectedColor}`;
   }
 };
 
