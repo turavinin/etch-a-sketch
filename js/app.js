@@ -5,6 +5,7 @@ const sliderRange = document.querySelector('#slider-range');
 const sliderTextOutput = document.querySelector('.size-value');
 const cell = document.querySelectorAll('.cell');
 const colorWell = document.querySelector('.color-input');
+const clearBtn = document.querySelector('.btn-clear');
 
 /* -------------- WINDOW ON LOAD -------------- */
 
@@ -13,19 +14,27 @@ window.onload = () => {
   sliderTextOutput.innerHTML = `${sliderRange.value} x ${sliderRange.value}`;
   createDivs(sliderRange.value);
   changeGridParamenter(sliderRange.value);
-  cells = document.getElementsByClassName('cell');
+
+  // Create one cell (div)
+  let oneDiv = document.createElement('div');
+  oneDiv.classList.add('cell');
+  sketchContainer.appendChild(oneDiv);
 };
 
 /* -------------- COLOR SELECTION ------------- */
 
-/* ---------------- PAINT ON/OFF CELLS---------------- */
+// Default Color
 let selectedColor = '#000000';
 
+// Update pen color
 const updateColor = (e) => {
   selectedColor = e.target.value;
 };
 
+// Update to the selected color
 colorWell.addEventListener('input', updateColor);
+
+/* ---------------- PAINT ON/OFF CELLS---------------- */
 
 // Create a variable to toggle the action of painting
 let togglePaint = true;
@@ -72,6 +81,17 @@ const paint = (e) => {
     e.target.style.backgroundColor = `${selectedColor}`;
   }
 };
+
+/* ------------ CLEAR ALL THE CELLS ----------- */
+
+const clearAllCells = () => {
+  let cells = document.querySelectorAll('.cell');
+  cells.forEach((cell) => {
+    cell.style.backgroundColor = '#e6e6e6';
+  });
+};
+
+clearBtn.addEventListener('click', clearAllCells);
 
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
 
