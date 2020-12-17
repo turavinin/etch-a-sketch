@@ -73,11 +73,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Stop painting when the mouse leaves the sketch
-sketchContainer.addEventListener('mouseleave', () => {
-  paintOnHover(false);
-});
-
 // Paint on hover
 const paintOnHover = (trigger) => {
   if (trigger == true) {
@@ -95,6 +90,11 @@ const paint = (e) => {
     e.target.style.backgroundColor = `${selectedColor}`;
   }
 };
+
+// Stop painting when the mouse leaves the sketch
+sketchContainer.addEventListener('mouseleave', () => {
+  paintOnHover(false);
+});
 
 /* ------------ CLEAR ALL THE CELLS ----------- */
 
@@ -116,6 +116,7 @@ const erase = () => {
 };
 
 eraserBtn.addEventListener('click', erase);
+
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
 
 // Output the selected slider range in span
