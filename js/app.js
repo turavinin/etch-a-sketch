@@ -11,7 +11,7 @@ const eraserBtn = document.querySelector('.btn-eraser');
 
 /* ----------------- DEFAULTS ----------------- */
 let selectedColor = '#000000';
-let defaultBg = '#e6e6e6';
+let defaultBg = bgColorWell.value;
 
 /* -------------- WINDOW ON LOAD -------------- */
 
@@ -37,16 +37,21 @@ const updateColor = (e) => {
 colorWell.addEventListener('input', updateColor);
 
 /* ------------ BG SELECTION ----------- */
-/* const changeBg = (e) => {
+const changeBg = (e) => {
   let cells = document.querySelectorAll('.cell');
   let newBg = e.target.value;
 
   cells.forEach((cell) => {
-    cell.classList.add('cell-bg');
+    if (!cell.classList.contains('painted'))
+      cell.style.backgroundColor = `${newBg}`;
   });
 };
 
-bgColorWell.addEventListener('input', changeBg); */
+bgColorWell.addEventListener('input', (e) => {
+  defaultBg = e.target.value;
+  changeBg(e);
+  eraserColor(e);
+});
 
 /* ---------------- PAINT ON/OFF CELLS---------------- */
 
@@ -59,6 +64,7 @@ document.addEventListener('click', (e) => {
   if (e.target.classList == 'cell' && togglePaint == true) {
     // Paint clicked cell
     e.target.style.backgroundColor = `${selectedColor}`;
+    e.target.classList.add('painted');
     // Paint cells on hover
     paintOnHover(true);
     // Change the state of the toggle
@@ -66,6 +72,7 @@ document.addEventListener('click', (e) => {
   } else if (togglePaint == false) {
     // Paint with the same color the cell when finish painting
     e.target.style.backgroundColor = `${selectedColor}`;
+    e.target.classList.add('painted');
     // Remover the action of painting
     paintOnHover(false);
     // Change the state of the toggle
@@ -87,6 +94,7 @@ const paintOnHover = (trigger) => {
 // Paint one cell
 const paint = (e) => {
   if (e.target.classList == 'cell') {
+    e.target.classList.add('painted');
     e.target.style.backgroundColor = `${selectedColor}`;
   }
 };
@@ -97,17 +105,29 @@ sketchContainer.addEventListener('mouseleave', () => {
 });
 
 /* ------------ CLEAR ALL THE CELLS ----------- */
+/* const newClearColor = (e) => {
+  console.log(e.target.value);
+  return e.target.value;
+}; */
 
 const clearAllCells = () => {
   let cells = document.querySelectorAll('.cell');
-  cells.forEach((cell) => {
-    cell.style.backgroundColor = `${defaultBg}`;
+  cells.forEach((e) => {
+    if (e.classList.contains('painted')) {
+      e.classList.remove('painted');
+      e.style.backgroundColor = `${defaultBg}`;
+    }
   });
 };
 
 clearBtn.addEventListener('click', clearAllCells);
 
 /* ------------ ERASER ----------- */
+// FALTA HACER ERASER TODO, FIJARSE QUE ESTA ASOCIADO CON ELECCION DE BG
+const eraserColor = (e) => {
+  return e.target.value;
+};
+
 const erase = () => {
   selectedColor = '#e6e6e6';
   /*   cell.forEach((e) => {
