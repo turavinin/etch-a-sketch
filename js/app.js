@@ -67,30 +67,29 @@ bgColorWell.addEventListener('input', (e) => {
   changeBg(e);
 });
 
-/* ---------------- PAINT ON/OFF CELLS---------------- */
-
-// Create a variable to toggle the action of painting
-let togglePaint = true;
+/* ---------------- MANAGING CELLS ---------------- */
+let paintingStatus = true;
 
 // Target the dynamic cells (divs)
 document.addEventListener('click', (e) => {
-  // Check the corresponding target and the state of the toggle
-  if (e.target.id == 'div-cell' && togglePaint == true) {
-    // Paint clicked cell
+  if (
+    e.target.id == 'div-cell' &&
+    paintingStatus == true &&
+    !sketchContainer.classList.contains('eraserMode')
+  ) {
     e.target.style.backgroundColor = `${selectedColor}`;
     e.target.classList.add('painted');
-    // Paint cells on hover
     paintOnHover(true);
-    // Change the state of the toggle
-    togglePaint = false;
-  } else if (e.target.id == 'div-cell' && togglePaint == false) {
-    // Paint with the same color the cell when finish painting
+    paintingStatus = false;
+  } else if (
+    e.target.id == 'div-cell' &&
+    paintingStatus == false &&
+    !sketchContainer.classList.contains('eraserMode')
+  ) {
     e.target.style.backgroundColor = `${selectedColor}`;
     e.target.classList.add('painted');
-    // Remover the action of painting
     paintOnHover(false);
-    // Change the state of the toggle
-    togglePaint = true;
+    paintingStatus = true;
   }
 });
 
@@ -110,8 +109,6 @@ const paint = (e) => {
   if (e.target.id == 'div-cell') {
     e.target.classList.add('painted');
     e.target.style.backgroundColor = `${selectedColor}`;
-  } else {
-    console.log('no pinta');
   }
 };
 
@@ -135,6 +132,50 @@ const clearAllCells = () => {
 clearBtn.addEventListener('click', clearAllCells);
 
 /* ------------ ERASER ----------- */
+document.addEventListener('click', (e) => {
+  if (
+    e.target.id == 'div-cell' &&
+    sketchContainer.classList.contains('eraserMode')
+  ) {
+    console.log('eraser Mod');
+    paintingStatus = false;
+    e.target.style.backgroundColor = `${defaultBg}`;
+    e.target.classList.remove('painted');
+    eraseOnHover(true);
+  }
+});
+
+eraserBtn.addEventListener('click', () => {
+  if (sketchContainer.classList.contains('eraserMode')) {
+    sketchContainer.classList.remove('eraserMode');
+    eraserBtn.style.backgroundColor = '#1c40424d';
+  } else {
+    sketchContainer.classList.add('eraserMode');
+    eraserBtn.style.backgroundColor = '#59b69f';
+  }
+});
+
+const erase = (e) => {
+  if (e.target.id == 'div-cell') {
+    e.target.classList.remove('painted');
+    e.target.style.backgroundColor = `${defaultBg}`;
+  }
+};
+
+const eraseOnHover = (trigger) => {
+  if (trigger == true) {
+    // Paint
+    document.addEventListener('mouseover', erase);
+  } else {
+    // No paint
+    document.removeEventListener('mouseover', erase);
+  }
+};
+
+// Stop painting when the mouse leaves the sketch
+sketchContainer.addEventListener('mouseleave', () => {
+  eraseOnHover(false);
+});
 
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
 

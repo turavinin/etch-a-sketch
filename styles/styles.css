@@ -16,6 +16,7 @@
   --gridBorderColor: #afafaf;
   --btnBorder: 1px solid #60f6d3;
   --btnBg: #1c40424d;
+  --btnBgActive: #265247;
 }
 
 /* -------------------------------------------- */
@@ -224,12 +225,9 @@ body {
   border: var(--btnBorder);
   background-color: var(--btnBg);
   transition: all 200ms ease;
+  outline: none;
 }
 
-/* BTN CLEAR */
-/* .btn-clear:hover {
-  background-color: #306c704d;
-} */
 .btn-clear:focus,
 .btn-grid:focus {
   outline: none;
