@@ -8,8 +8,10 @@ const colorWell = document.querySelector('.color-input');
 const bgColorWell = document.querySelector('.bg-color-input');
 const clearBtn = document.querySelector('.btn-clear');
 const eraserBtn = document.querySelector('.btn-eraser');
+const allBtn = document.querySelectorAll('.btn');
 
 /* ----------------- DEFAULTS ----------------- */
+
 let selectedColor = '#000000';
 let defaultBg = bgColorWell.value;
 
@@ -26,6 +28,16 @@ window.onload = () => {
   oneDiv.classList.add('cell');
   sketchContainer.appendChild(oneDiv);
 };
+
+/* -------------- BUTTONS EFFECTS ------------- */
+allBtn.forEach((e) => {
+  e.addEventListener('click', () => {
+    e.classList.add('clicked');
+    setTimeout(() => {
+      e.classList.remove('clicked');
+    }, 200);
+  });
+});
 
 /* -------------- COLOR SELECTION ------------- */
 // Update pen color
@@ -50,7 +62,6 @@ const changeBg = (e) => {
 bgColorWell.addEventListener('input', (e) => {
   defaultBg = e.target.value;
   changeBg(e);
-  eraserColor(e);
 });
 
 /* ---------------- PAINT ON/OFF CELLS---------------- */
@@ -105,10 +116,6 @@ sketchContainer.addEventListener('mouseleave', () => {
 });
 
 /* ------------ CLEAR ALL THE CELLS ----------- */
-/* const newClearColor = (e) => {
-  console.log(e.target.value);
-  return e.target.value;
-}; */
 
 const clearAllCells = () => {
   let cells = document.querySelectorAll('.cell');
@@ -123,19 +130,6 @@ const clearAllCells = () => {
 clearBtn.addEventListener('click', clearAllCells);
 
 /* ------------ ERASER ----------- */
-// FALTA HACER ERASER TODO, FIJARSE QUE ESTA ASOCIADO CON ELECCION DE BG
-const eraserColor = (e) => {
-  return e.target.value;
-};
-
-const erase = () => {
-  selectedColor = '#e6e6e6';
-  /*   cell.forEach((e) => {
-    e.addEventListener('mouseover', paint(true));
-  }); */
-};
-
-eraserBtn.addEventListener('click', erase);
 
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
 
