@@ -230,7 +230,8 @@ body {
 /* .btn-clear:hover {
   background-color: #306c704d;
 } */
-.btn-clear:focus {
+.btn-clear:focus,
+.btn-grid:focus {
   outline: none;
 }
 

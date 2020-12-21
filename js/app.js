@@ -83,7 +83,7 @@ document.addEventListener('click', (e) => {
     paintOnHover(true);
     // Change the state of the toggle
     togglePaint = false;
-  } else if (togglePaint == false) {
+  } else if (e.target.id == 'div-cell' && togglePaint == false) {
     // Paint with the same color the cell when finish painting
     e.target.style.backgroundColor = `${selectedColor}`;
     e.target.classList.add('painted');
@@ -91,8 +91,6 @@ document.addEventListener('click', (e) => {
     paintOnHover(false);
     // Change the state of the toggle
     togglePaint = true;
-  } else {
-    console.log('no pinta');
   }
 });
 
