@@ -1,15 +1,18 @@
 /* --------------- DOM VARIABLES -------------- */
 
 const sketchContainer = document.querySelector('#sketch-container');
+const sketchBorder = document.querySelector('.sketch-border');
 const sliderRange = document.querySelector('#slider-range');
 const sliderTextOutput = document.querySelector('.size-value');
-const cell = document.querySelectorAll('.cell');
+const cell = document.querySelectorAll('#div-cell');
 const colorWell = document.querySelector('.color-input');
 const bgColorWell = document.querySelector('.bg-color-input');
+
+/* ------------------ BUTTONS ----------------- */
+const allBtn = document.querySelectorAll('.btn');
 const clearBtn = document.querySelector('.btn-clear');
 const eraserBtn = document.querySelector('.btn-eraser');
-const allBtn = document.querySelectorAll('.btn');
-
+const gridBtn = document.querySelector('.btn-grid');
 /* ----------------- DEFAULTS ----------------- */
 
 let selectedColor = '#000000';
@@ -25,7 +28,7 @@ window.onload = () => {
 
   // Create one cell (div)
   let oneDiv = document.createElement('div');
-  oneDiv.classList.add('cell');
+  oneDiv.id = 'div-cell';
   sketchContainer.appendChild(oneDiv);
 };
 
@@ -50,7 +53,7 @@ colorWell.addEventListener('input', updateColor);
 
 /* ------------ BG SELECTION ----------- */
 const changeBg = (e) => {
-  let cells = document.querySelectorAll('.cell');
+  let cells = document.querySelectorAll('#div-cell');
   let newBg = e.target.value;
 
   cells.forEach((cell) => {
@@ -72,7 +75,7 @@ let togglePaint = true;
 // Target the dynamic cells (divs)
 document.addEventListener('click', (e) => {
   // Check the corresponding target and the state of the toggle
-  if (e.target.classList == 'cell' && togglePaint == true) {
+  if (e.target.id == 'div-cell' && togglePaint == true) {
     // Paint clicked cell
     e.target.style.backgroundColor = `${selectedColor}`;
     e.target.classList.add('painted');
@@ -88,6 +91,8 @@ document.addEventListener('click', (e) => {
     paintOnHover(false);
     // Change the state of the toggle
     togglePaint = true;
+  } else {
+    console.log('no pinta');
   }
 });
 
@@ -104,9 +109,11 @@ const paintOnHover = (trigger) => {
 
 // Paint one cell
 const paint = (e) => {
-  if (e.target.classList == 'cell') {
+  if (e.target.id == 'div-cell') {
     e.target.classList.add('painted');
     e.target.style.backgroundColor = `${selectedColor}`;
+  } else {
+    console.log('no pinta');
   }
 };
 
@@ -118,7 +125,7 @@ sketchContainer.addEventListener('mouseleave', () => {
 /* ------------ CLEAR ALL THE CELLS ----------- */
 
 const clearAllCells = () => {
-  let cells = document.querySelectorAll('.cell');
+  let cells = document.querySelectorAll('#div-cell');
   cells.forEach((e) => {
     if (e.classList.contains('painted')) {
       e.classList.remove('painted');
@@ -158,6 +165,7 @@ const createDivs = (oneSide) => {
 // Create One Div
 const createOneDiv = () => {
   let oneDiv = document.createElement('div');
+  oneDiv.id = 'div-cell';
   oneDiv.classList.add('cell');
   sketchContainer.appendChild(oneDiv);
 };
@@ -175,3 +183,11 @@ const changeGridParamenter = (newParameter) => {
   sketchContainer.style.gridTemplateColumns = `repeat(${newParameter}, 1fr)`;
   sketchContainer.style.gridTemplateRows = `repeat(${newParameter}, 1fr)`;
 };
+
+/* ------------ GRID TOGGLE ----------- */
+gridBtn.addEventListener('click', () => {
+  let cells = document.querySelectorAll('#div-cell');
+  cells.forEach((cell) => {
+    cell.classList.toggle('no-grid');
+  });
+});

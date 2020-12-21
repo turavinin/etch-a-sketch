@@ -270,8 +270,6 @@ body {
     rgba(11, 109, 134, 1) 65%,
     rgba(6, 85, 101, 1) 100%
   );
-  border-left: 1px solid var(--gridBorderColor);
-  border-top: 1px solid var(--gridBorderColor);
 }
 
 /* ------------- SKETCH CONTAINER ------------- */
@@ -292,14 +290,21 @@ body {
 
 /* ------------------- DIVS ------------------- */
 
-.cell {
+#div-cell {
   /* Bg */
   background-color: #e6e6e6;
+}
+
+#div-cell:hover {
+  background-color: #7afcd5;
+}
+
+.cell {
   /* Borders */
   border-right: 1px solid var(--gridBorderColor);
   border-bottom: 1px solid var(--gridBorderColor);
 }
 
-.cell:hover {
-  background-color: #7afcd5;
+.no-grid {
+  border: none;
 }
