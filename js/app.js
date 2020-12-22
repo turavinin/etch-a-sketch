@@ -132,6 +132,8 @@ const clearAllCells = () => {
 clearBtn.addEventListener('click', clearAllCells);
 
 /* ------------ ERASER ----------- */
+// CAMBIAR A BORRAR MANTENIENDO CLICK, BUSCAR MOUSDOWN EN GOOGLE
+
 document.addEventListener('click', (e) => {
   if (
     e.target.id == 'div-cell' &&
@@ -141,7 +143,7 @@ document.addEventListener('click', (e) => {
     paintingStatus = false;
     e.target.style.backgroundColor = `${defaultBg}`;
     e.target.classList.remove('painted');
-    eraseOnHover(true);
+    eraseOnDown(e);
   }
 });
 
@@ -162,19 +164,19 @@ const erase = (e) => {
   }
 };
 
-const eraseOnHover = (trigger) => {
+const eraseOnDown = (trigger) => {
   if (trigger == true) {
     // Paint
-    document.addEventListener('mouseover', erase);
+    document.addEventListener('mousedown', erase);
   } else {
     // No paint
-    document.removeEventListener('mouseover', erase);
+    document.removeEventListener('mousedown', erase);
   }
 };
 
 // Stop painting when the mouse leaves the sketch
 sketchContainer.addEventListener('mouseleave', () => {
-  eraseOnHover(false);
+  eraseOnDown(false);
 });
 
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
