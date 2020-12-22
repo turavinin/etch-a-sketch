@@ -112,6 +112,19 @@ eraserBtn.addEventListener('click', () => {
   eraserStatus === false ? (eraserStatus = true) : (eraserStatus = false);
 });
 
+document.addEventListener('click', (e) => {
+  console.log(e.target.id);
+  if (
+    e.target.id != 'sketch-container' &&
+    e.target.id != 'div-cell' &&
+    e.target != eraserBtn &&
+    eraserBtn.classList.contains('btn-active')
+  ) {
+    eraserBtn.classList.remove('btn-active');
+    eraserStatus = false;
+  }
+});
+
 document.addEventListener('mousedown', (e) => {
   if (e.target.id == 'div-cell' && eraserStatus === true) {
     eraseOnMove();
