@@ -68,55 +68,41 @@ bgColorWell.addEventListener('input', (e) => {
 });
 
 /* ---------------- MANAGING CELLS ---------------- */
-let paintingStatus = true;
+let paintingStatus = false;
 
 // Target the dynamic cells (divs)
-document.addEventListener('click', (e) => {
+document.addEventListener('mousedown', (e) => {
   if (
+    paintingStatus === false &&
     e.target.id == 'div-cell' &&
-    paintingStatus == true &&
     !sketchContainer.classList.contains('eraserMode')
   ) {
-    e.target.style.backgroundColor = `${selectedColor}`;
-    e.target.classList.add('painted');
-    paintOnHover(true);
-    paintingStatus = false;
-  } else if (
-    e.target.id == 'div-cell' &&
-    paintingStatus == false &&
-    !sketchContainer.classList.contains('eraserMode')
-  ) {
-    e.target.style.backgroundColor = `${selectedColor}`;
-    e.target.classList.add('painted');
-    paintOnHover(false);
+    console.log(paintingStatus);
     paintingStatus = true;
+    paintOnMove(paintingStatus);
   }
 });
 
-// Paint on hover
-const paintOnHover = (trigger) => {
-  if (trigger == true) {
-    // Paint
-    document.addEventListener('mouseover', paint);
-  } else {
-    // No paint
-    document.removeEventListener('mouseover', paint);
+document.addEventListener('mouseup', () => {
+  if (paintingStatus === true) {
+    paintingStatus = false;
+  }
+});
+
+// Paint on move
+const paintOnMove = (paintingStatus) => {
+  if (paintingStatus === true) {
+    document.addEventListener('mousemove', paint);
   }
 };
 
 // Paint one cell
 const paint = (e) => {
-  if (e.target.id == 'div-cell') {
+  if (e.target.id == 'div-cell' && paintingStatus === true) {
     e.target.classList.add('painted');
     e.target.style.backgroundColor = `${selectedColor}`;
   }
 };
-
-// Stop painting when the mouse leaves the sketch
-sketchContainer.addEventListener('mouseleave', () => {
-  paintOnHover(false);
-});
-
 /* ------------ CLEAR ALL THE CELLS ----------- */
 
 const clearAllCells = () => {
@@ -132,6 +118,7 @@ const clearAllCells = () => {
 clearBtn.addEventListener('click', clearAllCells);
 
 /* ------------ ERASER ----------- */
+<<<<<<< HEAD
 // CAMBIAR A BORRAR MANTENIENDO CLICK, BUSCAR MOUSDOWN EN GOOGLE
 
 document.addEventListener('click', (e) => {
@@ -178,6 +165,8 @@ const eraseOnDown = (trigger) => {
 sketchContainer.addEventListener('mouseleave', () => {
   eraseOnDown(false);
 });
+=======
+>>>>>>> paint-on-click
 
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
 
