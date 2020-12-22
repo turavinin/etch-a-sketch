@@ -112,6 +112,7 @@ eraserBtn.addEventListener('click', () => {
   eraserStatus === false ? (eraserStatus = true) : (eraserStatus = false);
 });
 
+// Disable eraser when clicking outside the divs
 document.addEventListener('click', (e) => {
   console.log(e.target.id);
   if (
@@ -125,22 +126,26 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Erase on event
 document.addEventListener('mousedown', (e) => {
   if (e.target.id == 'div-cell' && eraserStatus === true) {
     eraseOnMove();
   }
 });
 
+// Disable erase on event
 document.addEventListener('mouseup', () => {
   if (eraserBtn.classList.contains('btn-active')) {
     document.removeEventListener('mousemove', erase);
   }
 });
 
+// Erase on move
 const eraseOnMove = () => {
   document.addEventListener('mousemove', erase);
 };
 
+// Erase logic
 const erase = (e) => {
   if (e.target.id == 'div-cell' && e.target.classList.contains('painted')) {
     e.target.classList.remove('painted');
