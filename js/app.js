@@ -67,7 +67,7 @@ bgColorWell.addEventListener('input', (e) => {
   changeBg(e);
 });
 
-/* ---------------- MANAGING CELLS ---------------- */
+/* ---------------- PAINT CELLS ---------------- */
 let paintingStatus = false;
 
 // Target the dynamic cells (divs)
@@ -77,7 +77,6 @@ document.addEventListener('mousedown', (e) => {
     e.target.id == 'div-cell' &&
     !sketchContainer.classList.contains('eraserMode')
   ) {
-    console.log(paintingStatus);
     paintingStatus = true;
     paintOnMove(paintingStatus);
   }
@@ -103,6 +102,15 @@ const paint = (e) => {
     e.target.style.backgroundColor = `${selectedColor}`;
   }
 };
+
+/* ------------ ERASER ----------- */
+let eraserStatus = false;
+
+eraserBtn.addEventListener('click', () => {
+  sketchContainer.classList.toggle('eraserMode');
+  eraserBtn.classList.toggle('btn-active');
+});
+
 /* ------------ CLEAR ALL THE CELLS ----------- */
 
 const clearAllCells = () => {
@@ -116,57 +124,6 @@ const clearAllCells = () => {
 };
 
 clearBtn.addEventListener('click', clearAllCells);
-
-/* ------------ ERASER ----------- */
-<<<<<<< HEAD
-// CAMBIAR A BORRAR MANTENIENDO CLICK, BUSCAR MOUSDOWN EN GOOGLE
-
-document.addEventListener('click', (e) => {
-  if (
-    e.target.id == 'div-cell' &&
-    sketchContainer.classList.contains('eraserMode')
-  ) {
-    console.log('eraser Mod');
-    paintingStatus = false;
-    e.target.style.backgroundColor = `${defaultBg}`;
-    e.target.classList.remove('painted');
-    eraseOnDown(e);
-  }
-});
-
-eraserBtn.addEventListener('click', () => {
-  if (sketchContainer.classList.contains('eraserMode')) {
-    sketchContainer.classList.remove('eraserMode');
-    eraserBtn.style.backgroundColor = '#1c40424d';
-  } else {
-    sketchContainer.classList.add('eraserMode');
-    eraserBtn.style.backgroundColor = '#59b69f';
-  }
-});
-
-const erase = (e) => {
-  if (e.target.id == 'div-cell') {
-    e.target.classList.remove('painted');
-    e.target.style.backgroundColor = `${defaultBg}`;
-  }
-};
-
-const eraseOnDown = (trigger) => {
-  if (trigger == true) {
-    // Paint
-    document.addEventListener('mousedown', erase);
-  } else {
-    // No paint
-    document.removeEventListener('mousedown', erase);
-  }
-};
-
-// Stop painting when the mouse leaves the sketch
-sketchContainer.addEventListener('mouseleave', () => {
-  eraseOnDown(false);
-});
-=======
->>>>>>> paint-on-click
 
 /* ------- SLIDER OUTPUT / DIV CREATION ------- */
 
