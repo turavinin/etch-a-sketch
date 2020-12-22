@@ -75,7 +75,7 @@ document.addEventListener('mousedown', (e) => {
   if (
     paintingStatus === false &&
     e.target.id == 'div-cell' &&
-    !sketchContainer.classList.contains('eraserMode')
+    eraserStatus === false
   ) {
     paintingStatus = true;
     paintOnMove(paintingStatus);
@@ -106,10 +106,34 @@ const paint = (e) => {
 /* ------------ ERASER ----------- */
 let eraserStatus = false;
 
+// Eraser & Button Status
 eraserBtn.addEventListener('click', () => {
-  sketchContainer.classList.toggle('eraserMode');
   eraserBtn.classList.toggle('btn-active');
+  eraserStatus === false ? (eraserStatus = true) : (eraserStatus = false);
 });
+
+document.addEventListener('mousedown', (e) => {
+  if (e.target.id == 'div-cell' && eraserStatus === true) {
+    eraseOnMove();
+  }
+});
+
+document.addEventListener('mouseup', () => {
+  if (eraserBtn.classList.contains('btn-active')) {
+    document.removeEventListener('mousemove', erase);
+  }
+});
+
+const eraseOnMove = () => {
+  document.addEventListener('mousemove', erase);
+};
+
+const erase = (e) => {
+  if (e.target.id == 'div-cell' && e.target.classList.contains('painted')) {
+    e.target.classList.remove('painted');
+    e.target.style.backgroundColor = `${defaultBg}`;
+  }
+};
 
 /* ------------ CLEAR ALL THE CELLS ----------- */
 
