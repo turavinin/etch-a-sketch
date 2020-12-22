@@ -35,6 +35,7 @@ body {
   background-image: url(/images/bg2.jpg);
   background-size: cover;
   font-size: 15px;
+  user-select: none;
 }
 
 /* -------------------------------------------- */
