@@ -13,6 +13,8 @@ const allBtn = document.querySelectorAll('.btn');
 const clearBtn = document.querySelector('.btn-clear');
 const eraserBtn = document.querySelector('.btn-eraser');
 const gridBtn = document.querySelector('.btn-grid');
+const shadingBtn = document.querySelector('.btn-shading');
+const lightenBtn = document.querySelector('.btn-lighten');
 /* ----------------- DEFAULTS ----------------- */
 
 let selectedColor = '#000000';
@@ -79,6 +81,13 @@ document.addEventListener('mousedown', (e) => {
   ) {
     paintingStatus = true;
     paintOnMove(paintingStatus);
+
+    // Paint firs cell on click
+    e.target.classList.add('painted');
+    e.target.style.backgroundColor = `${selectedColor}`;
+
+    console.log(e.target.style.backgroundColor);
+    // log devuelve el color pintado... fijarse si iluminar desde aca o crear un evento nuevo
   }
 });
 
@@ -103,6 +112,34 @@ const paint = (e) => {
   }
 };
 
+/* ------------ LIGTHEN----------- */
+let lightenStatus = false;
+
+lightenBtn.addEventListener('click', () => {
+  lightenBtn.classList.toggle('btn-active');
+  lightenStatus === false ? (lightenStatus = true) : (lightenStatus = false);
+});
+
+const lightenColor = (color, percent) => {
+  let num = parseInt(color.replace('#', ''), 16),
+    amt = Math.round(2.55 * percent),
+    R = (num >> 16) + amt,
+    B = ((num >> 8) & 0x00ff) + amt,
+    G = (num >> 0x0000ff) + amt;
+
+  return (
+    '#' +
+    (
+      0x1000000 +
+      (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+      (B < 255 ? (B < 1 ? 0 : B) : 255) * 0x100 +
+      (G < 255 ? (G < 1 ? 0 : G) : 255)
+    )
+      .toString(16)
+      .slice(1)
+  );
+};
+
 /* ------------ ERASER ----------- */
 let eraserStatus = false;
 
@@ -114,7 +151,6 @@ eraserBtn.addEventListener('click', () => {
 
 // Disable eraser when clicking outside the divs
 document.addEventListener('click', (e) => {
-  console.log(e.target.id);
   if (
     e.target.id != 'sketch-container' &&
     e.target.id != 'div-cell' &&
@@ -130,6 +166,10 @@ document.addEventListener('click', (e) => {
 document.addEventListener('mousedown', (e) => {
   if (e.target.id == 'div-cell' && eraserStatus === true) {
     eraseOnMove();
+
+    // Erase on first click
+    e.target.classList.remove('painted');
+    e.target.style.backgroundColor = `${defaultBg}`;
   }
 });
 
