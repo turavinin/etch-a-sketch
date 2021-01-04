@@ -85,10 +85,9 @@ document.addEventListener('mousedown', (e) => {
     // Paint firs cell on click
     e.target.classList.add('painted');
     e.target.style.backgroundColor = `${selectedColor}`;
-
-    console.log(e.target.style.backgroundColor);
-    // log devuelve el color pintado... fijarse si iluminar desde aca o crear un evento nuevo
   }
+
+  // EL PROBLEMA ES QUE EN EL DOM ESTABLECE EL COLOR EN RGB y no en HEX
 });
 
 document.addEventListener('mouseup', () => {
@@ -115,11 +114,13 @@ const paint = (e) => {
 /* ------------ LIGTHEN----------- */
 let lightenStatus = false;
 
+// Add class active and toggle lighten status
 lightenBtn.addEventListener('click', () => {
   lightenBtn.classList.toggle('btn-active');
   lightenStatus === false ? (lightenStatus = true) : (lightenStatus = false);
 });
 
+// Method to light the given color
 const lightenColor = (color, percent) => {
   let num = parseInt(color.replace('#', ''), 16),
     amt = Math.round(2.55 * percent),
