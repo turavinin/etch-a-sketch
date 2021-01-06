@@ -94,9 +94,7 @@ document.addEventListener('mousedown', (e) => {
   ) {
     lightenActive = true;
     lightOnMove(lightenActive);
-    // deleteLightenMark();
-
-    mouseLeave();
+    deleteLightMarks();
 
     console.log(e.target.classList.contains('lighten-marked'));
   }
@@ -152,16 +150,40 @@ const light = (e) => {
   }
 };
 
+/* -------------------------------------------- */
+/*               SIGUE FUNCIONANDO 
+        EL MOUSE LEAVE AUNQUE TENGA EL IF             */
+/* -------------------------------------------- */
+
 // Remove lighten marked class from each cell when mouse leaves it
-const mouseLeave = () => {
+const deleteLightMarks = () => {
   let cells = document.querySelectorAll('#div-cell');
-  cells.forEach((element) => {
-    element.addEventListener('mouseleave', (e) => {
-      e.target.classList.remove('lighten-marked');
-      console.log('se fue');
+  if (lightenActive === true && lightenBtn.classList.contains('btn-active')) {
+    cells.forEach((element) => {
+      element.addEventListener('mouseleave', (e) => {
+        e.target.classList.remove('lighten-marked');
+        console.log('se fue');
+      });
     });
-  });
+  } else {
+    cells.forEach((element) => {
+      element.removeEventListener('mouseleave');
+    });
+  }
 };
+
+document.addEventListener('click', (e) => {
+  if (
+    e.target.id != 'sketch-container' &&
+    e.target.id != 'div-cell' &&
+    e.target != lightenBtn &&
+    lightenBtn.classList.contains('btn-active')
+  ) {
+    lightenBtn.classList.remove('btn-active');
+    lightenActive = false;
+    lightenStatus = false;
+  }
+});
 
 // Shading - Lighten function
 
