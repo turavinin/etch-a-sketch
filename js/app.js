@@ -71,13 +71,15 @@ bgColorWell.addEventListener('input', (e) => {
 
 /* ---------------- PAINT CELLS ---------------- */
 let paintingStatus = false;
+let lightenActive = false;
 
 // Target the dynamic cells (divs)
 document.addEventListener('mousedown', (e) => {
   if (
     paintingStatus === false &&
     e.target.id == 'div-cell' &&
-    eraserStatus === false
+    eraserStatus === false &&
+    lightenStatus === false
   ) {
     paintingStatus = true;
     paintOnMove(paintingStatus);
@@ -85,14 +87,25 @@ document.addEventListener('mousedown', (e) => {
     // Paint firs cell on click
     e.target.classList.add('painted');
     e.target.style.backgroundColor = `${selectedColor}`;
-  }
+  } else if (
+    lightenStatus === true &&
+    lightenActive === false &&
+    !e.target.classList.contains('lighten-marked')
+  ) {
+    lightenActive = true;
+    lightOnMove(lightenActive);
+    // deleteLightenMark();
 
-  // EL PROBLEMA ES QUE EN EL DOM ESTABLECE EL COLOR EN RGB y no en HEX
+    mouseLeave();
+
+    console.log(e.target.classList.contains('lighten-marked'));
+  }
 });
 
 document.addEventListener('mouseup', () => {
-  if (paintingStatus === true) {
+  if (paintingStatus === true || lightenActive === true) {
     paintingStatus = false;
+    lightenActive = false;
   }
 });
 
@@ -120,24 +133,54 @@ lightenBtn.addEventListener('click', () => {
   lightenStatus === false ? (lightenStatus = true) : (lightenStatus = false);
 });
 
-// Method to light the given color
-const lightenColor = (color, percent) => {
-  let num = parseInt(color.replace('#', ''), 16),
-    amt = Math.round(2.55 * percent),
-    R = (num >> 16) + amt,
-    B = ((num >> 8) & 0x00ff) + amt,
-    G = (num >> 0x0000ff) + amt;
+const lightOnMove = (lightenActive) => {
+  if (lightenActive === true) {
+    document.addEventListener('mousemove', light);
+  }
+};
 
+const light = (e) => {
+  if (
+    lightenActive === true &&
+    !e.target.classList.contains('lighten-marked')
+  ) {
+    e.target.classList.add('lighten-marked');
+    e.target.style.backgroundColor = RGB_Linear_Shade(
+      0.1,
+      e.target.style.backgroundColor
+    );
+  }
+};
+
+// Remove lighten marked class from each cell when mouse leaves it
+const mouseLeave = () => {
+  let cells = document.querySelectorAll('#div-cell');
+  cells.forEach((element) => {
+    element.addEventListener('mouseleave', (e) => {
+      e.target.classList.remove('lighten-marked');
+      console.log('se fue');
+    });
+  });
+};
+
+// Shading - Lighten function
+
+const RGB_Linear_Shade = (p, c) => {
+  var i = parseInt,
+    r = Math.round,
+    [a, b, c, d] = c.split(','),
+    P = p < 0,
+    t = P ? 0 : 255 * p,
+    P = P ? 1 + p : 1 - p;
   return (
-    '#' +
-    (
-      0x1000000 +
-      (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-      (B < 255 ? (B < 1 ? 0 : B) : 255) * 0x100 +
-      (G < 255 ? (G < 1 ? 0 : G) : 255)
-    )
-      .toString(16)
-      .slice(1)
+    'rgb' +
+    (d ? 'a(' : '(') +
+    r(i(a[3] == 'a' ? a.slice(5) : a.slice(4)) * P + t) +
+    ',' +
+    r(i(b) * P + t) +
+    ',' +
+    r(i(c) * P + t) +
+    (d ? ',' + d : ')')
   );
 };
 
