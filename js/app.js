@@ -72,6 +72,7 @@ bgColorWell.addEventListener('input', (e) => {
 /* ---------------- PAINT CELLS ---------------- */
 let paintingStatus = false;
 let lightenActive = false;
+let shadingActive = false;
 
 // Target the dynamic cells (divs)
 document.addEventListener('mousedown', (e) => {
@@ -95,15 +96,27 @@ document.addEventListener('mousedown', (e) => {
     lightenActive = true;
     lightOnMove(lightenActive);
     deleteLightMarks();
-
-    console.log(e.target.classList.contains('lighten-marked'));
+  } else if (
+    shadingStatus === true &&
+    shadingActive === false &&
+    !e.target.classList.contains('shaden-marked')
+  ) {
+    console.log('1');
+    shadingActive = true;
+    shadeOnMove(shadingActive);
+    deleteShadeMarks();
   }
 });
 
 document.addEventListener('mouseup', () => {
   if (paintingStatus === true || lightenActive === true) {
     paintingStatus = false;
+
     lightenActive = false;
+    lightenStatus = false;
+
+    shadingActive = false;
+    shadingStatus = false;
   }
 });
 
@@ -150,24 +163,15 @@ const light = (e) => {
   }
 };
 
-/* -------------------------------------------- */
-/*               SIGUE FUNCIONANDO 
-        EL MOUSE LEAVE AUNQUE TENGA EL IF             */
-/* -------------------------------------------- */
-
 // Remove lighten marked class from each cell when mouse leaves it
 const deleteLightMarks = () => {
   let cells = document.querySelectorAll('#div-cell');
-  if (lightenActive === true && lightenBtn.classList.contains('btn-active')) {
+
+  if (lightenActive == true && lightenBtn.classList.contains('btn-active')) {
     cells.forEach((element) => {
       element.addEventListener('mouseleave', (e) => {
         e.target.classList.remove('lighten-marked');
-        console.log('se fue');
       });
-    });
-  } else {
-    cells.forEach((element) => {
-      element.removeEventListener('mouseleave');
     });
   }
 };
@@ -182,6 +186,56 @@ document.addEventListener('click', (e) => {
     lightenBtn.classList.remove('btn-active');
     lightenActive = false;
     lightenStatus = false;
+  }
+});
+
+/* ------------ SHADING----------- */
+let shadingStatus = false;
+
+shadingBtn.addEventListener('click', () => {
+  shadingBtn.classList.toggle('btn-active');
+  shadingStatus === false ? (shadingStatus = true) : (shadingStatus = false);
+});
+
+const shadeOnMove = (shadingActive) => {
+  if (shadingActive === true) {
+    document.addEventListener('mousemove', shade);
+  }
+};
+
+const shade = (e) => {
+  if (shadingActive === true && !e.target.classList.contains('shaden-marked')) {
+    e.target.classList.add('shaden-marked');
+    e.target.style.backgroundColor = RGB_Linear_Shade(
+      -0.1,
+      e.target.style.backgroundColor
+    );
+  }
+};
+
+// Remove shading marked class from each cell when mouse leaves it
+const deleteShadeMarks = () => {
+  let cells = document.querySelectorAll('#div-cell');
+
+  if (shadingActive == true && shadingBtn.classList.contains('btn-active')) {
+    cells.forEach((element) => {
+      element.addEventListener('mouseleave', (e) => {
+        e.target.classList.remove('shaden-marked');
+      });
+    });
+  }
+};
+
+document.addEventListener('click', (e) => {
+  if (
+    e.target.id != 'sketch-container' &&
+    e.target.id != 'div-cell' &&
+    e.target != shadingBtn &&
+    shadingBtn.classList.contains('btn-active')
+  ) {
+    shadingBtn.classList.remove('btn-active');
+    shadingActive = false;
+    shadingStatus = false;
   }
 });
 
