@@ -80,7 +80,8 @@ document.addEventListener('mousedown', (e) => {
     paintingStatus === false &&
     e.target.id == 'div-cell' &&
     eraserStatus === false &&
-    lightenStatus === false
+    lightenStatus === false &&
+    shadingStatus === false
   ) {
     paintingStatus = true;
     paintOnMove(paintingStatus);
