@@ -114,10 +114,8 @@ document.addEventListener('mouseup', () => {
     paintingStatus = false;
 
     lightenActive = false;
-    lightenStatus = false;
 
     shadingActive = false;
-    shadingStatus = false;
   }
 });
 
