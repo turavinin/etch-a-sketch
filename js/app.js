@@ -110,12 +110,18 @@ document.addEventListener('mousedown', (e) => {
 });
 
 document.addEventListener('mouseup', () => {
-  if (paintingStatus === true || lightenActive === true) {
+  if (
+    paintingStatus === true ||
+    lightenActive === true ||
+    shadingActive === true
+  ) {
     paintingStatus = false;
 
     lightenActive = false;
+    /* lightenStatus = false; */
 
     shadingActive = false;
+    /*  shadingStatus = false; */
   }
 });
 
